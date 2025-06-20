@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@layer components {
+    .btn {
+        @apply rounded-md font-medium transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer;
+    }
+
+    .testimonials-swiper .swiper-slide {
+        height: auto;
+    }
+
+    .custom-pagination .custom-bullet {
+        width: 8px !important;
+        height: 4px !important;
+        background-color: #4a5565 !important;
+        border-radius: 4px !important;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .custom-pagination .custom-bullet:hover {
+        background-color: #9ca3af !important;
+    }
+
+    .custom-pagination .custom-bullet.swiper-pagination-bullet-active {
+        width: 24px !important;
+        background-color: #1f2937 !important;
+    }
+}
