@@ -17,7 +17,7 @@ export default function Home() {
 					Hi, I'm <span className="font-bold">Diva Nur Anggraeni</span>
 				</>
 			}
-			description="Saya adalah remaja asal Purwokerto yang hobi menggambar dengan pensil, serta tertarik pada desain dan pemrograman. Melalui website ini, saya membagikan karya dan perjalanan kreatif saya, sekaligus membuka peluang untuk kolaborasi di dunia seni."
+			description="Saya adalah remaja asal Purwokerto yang suka menggambar sejak kecil. Menggambar dengan pensil menjadi kebiasaan yang membuat saya nyaman. Website ini saya buat bersama Rifqi Banu Safingi untuk membagikan beberapa karya saya."
 		>
 			{/* About section */}
 			<div className="w-full flex flex-col gap-6 md:flex-row-reverse">
@@ -34,8 +34,8 @@ export default function Home() {
 							<Button variant="outline" className="flex items-center self-start">
 								Discover More <ChevronRight />
 							</Button>
-                        </Link>
-                        
+						</Link>
+
 						<Link href="/contact">
 							<Button variant="default" className="flex items-center self-start">
 								Contact Me <ChevronRight />
