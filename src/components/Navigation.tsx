@@ -15,7 +15,7 @@ const navigation = [
 	},
 	{
 		name: "Gallery",
-		href: "/gallery",
+		href: "/arts",
 	},
 	{
 		name: "Contact",

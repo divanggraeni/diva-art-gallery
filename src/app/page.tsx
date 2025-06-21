@@ -51,7 +51,7 @@ export default function Home() {
 					<div className="flex justify-between w-full">
 						<h3 className="text-4xl font-semibold">Gallery</h3>
 
-						<Link href="/gallery">
+						<Link href="/arts">
 							<Button variant="outline" size="sm" className="flex items-center self-start">
 								See All <ChevronRight />
 							</Button>
@@ -69,7 +69,7 @@ export default function Home() {
 							<div className="p-4">
 								<h4 className="text-2xl font-semibold">{art.title}</h4>
 								<p className="text-gray-500 tracking-wide text-xl mb-4">{art.description.slice(0, 50)}...</p>
-								<Link href={`art/${art.slug}`}>
+								<Link href={`arts/${art.slug}`}>
 									<Button variant="outline" size="sm" className="flex items-center self-start">
 										Detail <ChevronRight />
 									</Button>

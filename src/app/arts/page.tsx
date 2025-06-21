@@ -82,7 +82,7 @@ export default function About() {
 						<div className="p-4">
 							<h4 className="text-2xl font-semibold">{art.title}</h4>
 							<p className="text-gray-500 tracking-wide text-xl mb-4">{art.description.slice(0, 50)}...</p>
-							<Link href={`art/${art.slug}`}>
+							<Link href={`arts/${art.slug}`}>
 								<Button variant="outline" size="sm" className="flex items-center self-start">
 									Detail <ChevronRight />
 								</Button>
