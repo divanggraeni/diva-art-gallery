@@ -43,6 +43,19 @@ export interface ArtProps {
 	slug: string
 	description: string
 	image: string
+	music?: {
+		title: string
+		artist: string
+		spotifyId: string
+	}
+}
+
+export interface MusicPlayerProps {
+	music: {
+		title: string
+		artist: string
+		spotifyId: string
+	}
 }
 
 export interface ContactItem {
