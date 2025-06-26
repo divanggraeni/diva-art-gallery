@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams } from "next/navigation"
+import { notFound, useParams } from "next/navigation"
 import { Arts } from "@/data/arts"
 import Page from "@/components/Page"
 import ImageWithErrorHandling from "@/components/ui/ImageWithErrorHandling"
@@ -18,16 +18,8 @@ export default function ArtDetail() {
 
 	if (!art) {
 		return (
-			<div className="h-svh w-full flex flex-col items-center justify-center gap-6">
-				<h1 className="text-2xl font-bold text-gray-600">Karya tidak ditemukan</h1>
-				<Link href="/arts">
-					<Button variant="ghost" className="flex items-center gap-2 text-2xl text-gray-500 hover:text-gray-700">
-						<ArrowLeftCircle className="w-8 h-8" />
-						Back to Gallery
-					</Button>
-				</Link>
-			</div>
-		)
+            notFound()
+        )
 	}
 
 	return (
