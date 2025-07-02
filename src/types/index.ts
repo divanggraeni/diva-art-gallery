@@ -59,7 +59,7 @@ export interface MusicPlayerProps {
 }
 
 export interface ContactItem {
-	href: string
+	url: string
 	label: string
 	icon: JSX.Element
 }
