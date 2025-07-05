@@ -4,6 +4,7 @@ import Page from "@/components/Page"
 import Button from "@/components/ui/Button"
 import Link from "next/link"
 import { useContacts } from "@/hooks/useContacts"
+import { Skeleton } from "@/components/ui/Skeleton"
 
 export default function Contact() {
 	const { contacts, loading, error } = useContacts()
@@ -18,8 +19,10 @@ export default function Contact() {
 			description="Saya selalu terbuka terhadap peluang dan kolaborasi baru. Baik Anda ingin memulai proyek atau sekadar ingin mengobrol, jangan ragu untuk menghubungi saya."
 		>
 			{loading && (
-				<div className="flex justify-center">
-					<p className="text-2xl">Loading...</p>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					{[...Array(4)].map((_, index) => (
+						<Skeleton key={index} className="h-20" />
+					))}
 				</div>
 			)}
 
