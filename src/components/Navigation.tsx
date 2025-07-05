@@ -31,7 +31,7 @@ export function DesktopNavigation() {
 			{navigation.map((item, index) => {
 				const isActive = pathname === item.href
 				return (
-					<Link key={index} href={item.href} className={`transition-all ${isActive ? "font-semibold border-b-2 border-gray-600 pb-1" : "text-gray-700"}`}>
+					<Link key={index} href={item.href} className={`transition-all duration-100 hover:border-b-2 hover:border-gray-600 hover:pb-1 ${isActive ? "font-semibold border-b-2 border-gray-600 pb-1" : "text-gray-700"}`}>
 						{item.name}
 					</Link>
 				)
