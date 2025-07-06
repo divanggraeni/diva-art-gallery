@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, JSX } from "react"
 
 export interface PageProps {
 	title: React.ReactNode | string
-	description: string
+	description: React.ReactNode | string
 	className?: string
 	children?: React.ReactNode
 }
