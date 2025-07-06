@@ -7,9 +7,12 @@ import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import Card from "@/components/ui/Card"
 import TestimonialsSwiper from "@/components/TestimonialsSwiper"
-import { Arts } from "@/data/arts"
+import { useArts } from "@/hooks/useArts"
+import { Skeleton } from "@/components/ui/Skeleton"
 
 export default function Home() {
+    const { arts, loading, error } = useArts()
+
 	return (
 		<Page
 			title={
@@ -60,15 +63,25 @@ export default function Home() {
 					<p className="text-gray-500 tracking-wide text-xl">Beberapa karya pilihan saya.</p>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4">
-					{[...Arts.slice(0, 3)].map((art, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4">
+                    {loading && [...Array(3)].map((_, index) => (
+                        <Skeleton key={index} className="h-96" />
+                    ))}
+
+                    {error && (
+                        <div className="flex justify-center">
+                            <p className="text-2xl">Error: {error}</p>
+                        </div>
+                    )}
+
+					{!loading && !error && Array.isArray(arts) && arts.slice(0, 3).map((art, index) => (
 						<Card key={index} className="p-0 gap-0">
 							<div className="relative w-full aspect-square rounded-2xl overflow-hidden">
 								<ImageWithErrorHandling src={art.image} alt={art.title} fill className="w-full h-full object-cover" loadingClassName="rounded-2xl" priority={index === 0} />
 							</div>
 							<div className="p-4">
-								<h4 className="text-2xl font-semibold">{art.title}</h4>
-								<p className="text-gray-500 tracking-wide text-xl mb-4">{art.description.slice(0, 50)}...</p>
+								<h4 className="text-xl font-semibold">{art.title}</h4>
+                                <p className="text-gray-500 tracking-wide mb-4" dangerouslySetInnerHTML={{ __html: art.description.slice(0, 50) + "..." }}></p>
 								<Link href={`arts/${art.slug}`}>
 									<Button variant="outline" size="sm" className="flex items-center self-start">
 										Detail <ChevronRight />
