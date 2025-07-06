@@ -1,18 +1,28 @@
 "use client"
 
 import { notFound, useParams } from "next/navigation"
-import { Arts } from "@/data/arts"
 import Page from "@/components/Page"
 import ImageWithErrorHandling from "@/components/ui/ImageWithErrorHandling"
 import SpotifyMusicPlayer from "@/components/SpotifyMusicPlayer"
 import { Music } from "lucide-react"
 import Card from "@/components/ui/Card"
+import { useArts } from "@/hooks/useArts"
+import { Skeleton } from "@/components/ui/Skeleton"
 
 export default function ArtDetail() {
+	const { arts, loading, error } = useArts()
 	const params = useParams()
 	const slug = params.slug as string
 
-	const art = Arts.find((art) => art.slug === slug)
+	const art = arts.find((art) => art.slug === slug)
+
+    if (loading) {
+        return (
+            <Page title="Loading..." description="Please wait a moment.">
+                <Skeleton className="w-full aspect-[3/4] rounded-2xl" />
+            </Page>
+        )
+    }
 
 	if (!art) {
 		return notFound()

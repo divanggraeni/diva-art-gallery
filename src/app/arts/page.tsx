@@ -6,22 +6,24 @@ import ImageWithErrorHandling from "@/components/ui/ImageWithErrorHandling"
 import Card from "@/components/ui/Card"
 import Link from "next/link"
 import Button from "@/components/ui/Button"
-import { Arts } from "@/data/arts"
 import { ChevronRight, ChevronLeft } from "lucide-react"
+import { useArts } from "@/hooks/useArts"
+import { Skeleton } from "@/components/ui/Skeleton"
 
 export default function About() {
+	const { arts, loading, error } = useArts()
 	const [currentPage, setCurrentPage] = useState(1)
 	const itemsPerPage = 10
 
 	// Hitung total halaman
-	const totalPages = Math.ceil(Arts.length / itemsPerPage)
+	const totalPages = Math.ceil(arts.length / itemsPerPage)
 
 	// Hitung index start dan end untuk slice
 	const startIndex = (currentPage - 1) * itemsPerPage
 	const endIndex = startIndex + itemsPerPage
 
 	// Data yang akan ditampilkan pada halaman saat ini
-	const currentArts = Arts.slice(startIndex, endIndex)
+	const currentArts = arts.slice(startIndex, endIndex)
 
 	// Fungsi untuk berpindah halaman
 	const goToPage = (page: number) => {
@@ -74,30 +76,40 @@ export default function About() {
 		>
 			{/* Grid Gambar */}
 			<div className="grid grid-cols-1 w-full md:grid-cols-3 gap-4 mb-8">
-				{currentArts.map((art, index) => (
-					<Card key={art.id} className="p-0 gap-0">
-						<div className="relative w-full aspect-square rounded-2xl overflow-hidden">
-							<ImageWithErrorHandling src={art.image} alt={art.title} fill className="w-full h-full object-cover" loadingClassName="rounded-2xl" priority={index === 0 && currentPage === 1} />
-						</div>
-						<div className="p-4">
-							<h4 className="text-2xl font-semibold">{art.title}</h4>
-							<p className="text-gray-500 tracking-wide text-xl mb-4">{art.description.slice(0, 50)}...</p>
-							<Link href={`arts/${art.slug}`}>
-								<Button variant="outline" size="sm" className="flex items-center self-start">
-									Detail <ChevronRight />
-								</Button>
-							</Link>
-						</div>
-					</Card>
-				))}
+				{loading && [...Array(3)].map((_, index) => <Skeleton key={index} className="h-96" />)}
+
+				{error && (
+					<div className="flex justify-center">
+						<p className="text-2xl">Error: {error}</p>
+					</div>
+				)}
+
+				{!loading &&
+					!error &&
+					currentArts.map((art, index) => (
+						<Card key={art.id} className="p-0 gap-0">
+							<div className="relative w-full aspect-square rounded-2xl overflow-hidden">
+								<ImageWithErrorHandling src={art.image} alt={art.title} fill className="w-full h-full object-cover" loadingClassName="rounded-2xl" priority={index === 0 && currentPage === 1} />
+							</div>
+							<div className="p-4">
+								<h4 className="text-2xl font-semibold">{art.title}</h4>
+								<p className="text-gray-500 tracking-wide text-xl mb-4" dangerouslySetInnerHTML={{ __html: art.description.slice(0, 50) + "..." }}></p>
+								<Link href={`arts/${art.slug}`}>
+									<Button variant="outline" size="sm" className="flex items-center self-start">
+										Detail <ChevronRight />
+									</Button>
+								</Link>
+							</div>
+						</Card>
+					))}
 			</div>
 
 			{/* Pagination */}
-			{totalPages > 1 && (
+			{!loading && !error && totalPages > 1 && (
 				<div className="flex flex-col items-center gap-4">
 					{/* Info halaman */}
 					<p className="text-gray-600">
-						Menampilkan {startIndex + 1}-{Math.min(endIndex, Arts.length)} dari {Arts.length} karya seni
+						Menampilkan {startIndex + 1}-{Math.min(endIndex, arts.length)} dari {arts.length} karya seni
 					</p>
 
 					{/* Navigasi pagination */}
