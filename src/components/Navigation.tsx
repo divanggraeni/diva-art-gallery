@@ -31,8 +31,9 @@ export function DesktopNavigation() {
 			{navigation.map((item, index) => {
 				const isActive = pathname === item.href
 				return (
-					<Link key={index} href={item.href} className={`transition-all duration-100 hover:border-b-2 hover:border-gray-600 hover:pb-1 ${isActive ? "font-semibold border-b-2 border-gray-600 pb-1" : "text-gray-700"}`}>
+					<Link key={index} href={item.href} className={`relative transition-all duration-100 text-gray-700 hover:text-gray-900 group ${isActive ? "text-gray-900" : ""}`}>
 						{item.name}
+						<span className={`h-[2px] bg-gray-900 block absolute bottom-0 left-0 transition-all duration-200 ease group-hover:w-full ${isActive ? "w-full" : "w-0"}`}></span>
 					</Link>
 				)
 			})}
@@ -59,8 +60,9 @@ export function MobileNavigation({ isOpen, setIsOpen }: { isOpen: boolean; setIs
 				{navigation.map((item, index) => {
 					const isActive = pathname === item.href
 					return (
-						<Link key={index} href={item.href} className={`text-3xl font-medium transition-all ${isActive ? "font-bold border-b-2 border-gray-600 pb-1" : "text-gray-700"}`} onClick={handleMenuClick}>
+						<Link key={index} href={item.href} className={`relative text-3xl transition-all duration-100 text-gray-700 hover:text-gray-900 group ${isActive ? "text-gray-900" : ""}`} onClick={handleMenuClick}>
 							{item.name}
+							<span className={`h-[2px] bg-gray-900 block absolute -bottom-2 left-0 transition-all duration-200 ease group-hover:w-full ${isActive ? "w-full" : "w-0"}`}></span>
 						</Link>
 					)
 				})}
